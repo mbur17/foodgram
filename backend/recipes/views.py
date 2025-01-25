@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from foodgram_backend.pagination import FoodgramPagination
+from shortener.models import UrlMap
+from shortener.service import generate_unique_code
 from .filters import IngredientFilterSet, RecipeFilterSet
 from .models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
 from .permissions import IsAuthorOrReadOnly
@@ -89,7 +91,21 @@ class RecipeViewSet(ModelViewSet):
     @action(detail=True, methods=['get'], url_path='get-link')
     def get_short_link(self, request, pk=None):
         """Возвращает короткую ссылку на рецепт."""
-        pass
+        recipe = get_object_or_404(Recipe, pk=pk)
+        domain = request.get_host()
+        scheme = request.scheme
+        short_code = generate_unique_code()
+        url_map, created = UrlMap.objects.get_or_create(
+            recipe=recipe,
+            defaults={
+                'full_url': f'{scheme}://{domain}/recipes/{recipe.id}/',
+                'short_code': short_code,
+                'short_url': f'/s/{short_code}'
+            }
+        )
+        return Response(
+            {'short-link': f'{scheme}://{domain}{url_map.short_url}'}
+        )
 
     @action(detail=False, methods=['get'], url_path='download_shopping_cart')
     def download_shopping_cart(self, request):

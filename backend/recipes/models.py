@@ -132,8 +132,8 @@ class ShoppingCart(AuthorRecipeModel):
     class Meta:
         unique_together = ('author', 'recipe')
         default_related_name = 'shopping_cart'
-        verbose_name = 'Корзина'
-        verbose_name_plural = verbose_name
+        verbose_name = 'Список покупок'
+        verbose_name_plural = 'Списки покупок'
 
     def __str__(self):
         return f'{self.recipe.name} в корзине у {self.author.username}'
