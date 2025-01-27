@@ -15,20 +15,23 @@ const Technologies = () => {
       <h1 className={styles.title}>Технологии</h1>
       <div className={styles.content}>
         <div>
-          <h2 className={styles.subtitle}>Технологии, которые применены в этом проекте:</h2>
+          <h2 className={styles.subtitle}>Стэк, который используется в бэкенде проекта:</h2>
           <div className={styles.text}>
             <ul className={styles.textItem}>
               <li className={styles.textItem}>
-                Python
+                Code: Python
               </li>
               <li className={styles.textItem}>
-                Django
+                Project Framework: Django
               </li>
               <li className={styles.textItem}>
-                Django REST Framework
+                REST API: Django REST Framework
               </li>
               <li className={styles.textItem}>
-                Djoser
+              Authentication System: Djoser
+              </li>
+              <li className={styles.textItem}>
+                DBMS: PostgreSQL
               </li>
             </ul>
           </div>
