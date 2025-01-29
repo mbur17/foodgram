@@ -17,7 +17,6 @@ class AuthorModel(models.Model):
 
 class AuthorRecipeModel(AuthorModel):
     """Абстрактная модель автора и рецепта."""
-
     recipe = models.ForeignKey(
         'recipes.Recipe', on_delete=models.CASCADE, verbose_name='Рецепт'
     )
