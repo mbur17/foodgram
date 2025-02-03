@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 
-from shortener.models import UrlMap
+from .models import UrlMap
 
 
 def redirect_to_full_url(request, short_code):

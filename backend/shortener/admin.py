@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shortener.models import UrlMap
+from .models import UrlMap
 
 
 @admin.register(UrlMap)
