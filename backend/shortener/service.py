@@ -2,7 +2,6 @@ import random
 
 from .models import UrlMap
 
-
 # Убраны схожие символы: l, I, 1.
 DICTIONARY = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz234567890'
 # Рекомендуемая длина от 2 до 10.

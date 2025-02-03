@@ -3,18 +3,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from .abstract_models import AuthorModel, AuthorRecipeModel
-from .constants import (
-    COOKING_MAX_TIME,
-    COOKING_MIN_TIME,
-    INGREDIENT_MAX_AMOUNT,
-    INGREDIENT_MIN_AMOUNT,
-    INGREDIENT_MAX_LENGTH,
-    RECIPE_IMAGE_DIR,
-    RECIPE_MAX_LENGTH,
-    TAG_MAX_LENGTH,
-    UNIT_MAX_LENGTH,
-)
-
+from .constants import (COOKING_MAX_TIME, COOKING_MIN_TIME,
+                        INGREDIENT_MAX_AMOUNT, INGREDIENT_MAX_LENGTH,
+                        INGREDIENT_MIN_AMOUNT, RECIPE_IMAGE_DIR,
+                        RECIPE_MAX_LENGTH, TAG_MAX_LENGTH, UNIT_MAX_LENGTH)
 
 User = get_user_model()
 

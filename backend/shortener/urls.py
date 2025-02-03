@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import redirect_to_full_url
 
+from .views import redirect_to_full_url
 
 app_name = 'shortener'
 

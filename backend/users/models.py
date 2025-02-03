@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 
-
 AVATAR_DIR = 'users/'
 NAME_MAX_LENGTH = 150
 
