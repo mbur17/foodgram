@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from foodgram_backend.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
-
-from foodgram_backend.fields import Base64ImageField
 
 from .models import Subscription
 
