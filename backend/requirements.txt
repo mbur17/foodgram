@@ -23,6 +23,7 @@ Jinja2==3.1.5
 MarkupSafe==3.0.2
 oauthlib==3.2.2
 packaging==24.2
+psycopg2-binary==2.9.3
 Pillow==9.3.0
 pluggy==1.5.0
 pycparser==2.22
