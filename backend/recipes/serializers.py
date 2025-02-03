@@ -3,14 +3,8 @@ from rest_framework import serializers
 from foodgram_backend.fields import Base64ImageField
 from users.serializers import FoodgramUserSerializer
 
-from .models import (
-    Favorite,
-    Ingredient,
-    IngredientInRecipe,
-    Recipe,
-    ShoppingCart,
-    Tag
-)
+from .models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
+                     ShoppingCart, Tag)
 
 
 class TagSerializer(serializers.ModelSerializer):

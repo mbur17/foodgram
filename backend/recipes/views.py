@@ -15,14 +15,9 @@ from shortener.service import generate_unique_code
 from .filters import IngredientFilterSet, RecipeFilterSet
 from .models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
 from .permissions import IsAuthorOrReadOnly
-from .serializers import (
-    CreateRecipeSerializer,
-    FavoriteSerializer,
-    IngredientSerializer,
-    RecipeSerializer,
-    ShoppingCartSerializer,
-    TagSerializer
-)
+from .serializers import (CreateRecipeSerializer, FavoriteSerializer,
+                          IngredientSerializer, RecipeSerializer,
+                          ShoppingCartSerializer, TagSerializer)
 from .services import generate_shopping_list
 
 
