@@ -119,9 +119,9 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {
-        'user_create': 'users.serializers.FoodgramUserCreateSerializer',
-        'user': 'users.serializers.FoodgramUserSerializer',
-        'current_user': 'users.serializers.FoodgramUserSerializer',
+        'user_create': 'api.users.serializers.FoodgramUserCreateSerializer',
+        'user': 'api.users.serializers.FoodgramUserSerializer',
+        'current_user': 'api.users.serializers.FoodgramUserSerializer',
     },
     'PERMISSIONS': {
         'user_list': ('rest_framework.permissions.AllowAny',),
