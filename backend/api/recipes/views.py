@@ -1,19 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.utils.text import slugify
 from django_filters.rest_framework import DjangoFilterBackend
-from foodgram_backend.pagination import FoodgramPagination
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from shortener.models import UrlMap
-from shortener.service import generate_unique_code
 
-from .filters import IngredientFilterSet, RecipeFilterSet
-from .models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
-from .permissions import IsAuthorOrReadOnly
+from recipes.models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
+from shortener.models import UrlMap
+from shortener.services import generate_unique_code
+
+from ..filters import IngredientFilterSet, RecipeFilterSet
+from ..pagination import FoodgramPagination
+from ..permissions import IsAuthorOrReadOnly
 from .serializers import (CreateRecipeSerializer, FavoriteSerializer,
                           IngredientSerializer, RecipeSerializer,
                           ShoppingCartSerializer, TagSerializer)
@@ -113,9 +113,10 @@ class RecipeViewSet(ModelViewSet):
                 content_type='text/plain',
                 status=204,
             )
-        filename = f'{slugify(user.username)}_shopping_list.txt'
         response = HttpResponse(shopping_list, content_type='text/plain')
-        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response['Content-Disposition'] = (
+            'attachment; filename="shopping_list.txt"'
+        )
         return response
 
     @action(detail=True, methods=['post'], url_path='shopping_cart')

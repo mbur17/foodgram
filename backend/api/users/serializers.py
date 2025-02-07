@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
-from foodgram_backend.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
-from .models import Subscription
+from users.models import Subscription
+
+from ..fields import Base64ImageField
 
 User = get_user_model()
 
@@ -74,7 +75,7 @@ class UserRecipeSerializer(FoodgramUserSerializer):
         )
 
     def get_recipes(self, obj):
-        from recipes.serializers import ShortRecipeSerializer
+        from api.recipes.serializers import ShortRecipeSerializer
         request = self.context.get('request')
         recipes = obj.recipes.all()
         try:
