@@ -2,14 +2,17 @@ import json
 import os
 
 from django.core.management.base import BaseCommand
+
 from recipes.models import Ingredient
+
+CONTAINER_FILE_PATH = '/app/ingredients.json'
 
 
 class Command(BaseCommand):
     help = 'Загружает ингредиенты в базу данных из ingredients.json'
 
     def handle(self, *args, **kwargs):
-        file_path = '/app/ingredients.json'
+        file_path = CONTAINER_FILE_PATH
         if not os.path.exists(file_path):
             self.stderr.write(self.style.ERROR(f'Файл {file_path} не найден!'))
             return
