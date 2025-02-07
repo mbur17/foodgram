@@ -1,8 +1,7 @@
-from rest_framework import serializers
-
 from api.users.serializers import FoodgramUserSerializer
 from recipes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShoppingCart, Tag)
+from rest_framework import serializers
 
 from ..fields import Base64ImageField
 
