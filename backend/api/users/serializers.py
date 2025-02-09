@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
+
 from users.models import Subscription
 
 from ..fields import Base64ImageField
@@ -75,14 +76,13 @@ class UserRecipeSerializer(FoodgramUserSerializer):
 
     def get_recipes(self, obj):
         from api.recipes.serializers import ShortRecipeSerializer
-        request = self.context.get('request')
+        request = self.context['request']
         recipes = obj.recipes.all()
-        try:
-            recipes_limit = int(request.query_params.get('recipes_limit'))
-        except (ValueError, TypeError):
-            pass
-        else:
-            recipes = recipes[:recipes_limit]
+        recipes_limit = request.query_params.get('recipes_limit')
+        # Проверяем recipes_limit перед преобразованием в int,
+        # чтобы избежать ошибок.
+        if recipes_limit and recipes_limit.isdigit():
+            recipes = recipes[:int(recipes_limit)]
         return ShortRecipeSerializer(recipes, many=True).data
 
 

@@ -17,6 +17,7 @@ class Tag(models.Model):
     slug = models.SlugField('Слаг', max_length=TAG_MAX_LENGTH, unique=True)
 
     class Meta:
+        ordering = ('name',)
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
@@ -35,9 +36,9 @@ class Ingredient(models.Model):
 
     class Meta:
         unique_together = ('name', 'measurement_unit')
+        ordering = ('name',)
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
-        ordering = ('name',)
 
     def __str__(self):
         return f'{self.name} ({self.measurement_unit})'
@@ -68,10 +69,10 @@ class Recipe(AuthorModel):
     created_at = models.DateTimeField('Создано', auto_now_add=True)
 
     class Meta:
+        ordering = ('-created_at',)
         default_related_name = 'recipes'
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
-        ordering = ('-created_at',)
 
     def __str__(self):
         return self.name
@@ -99,6 +100,7 @@ class IngredientInRecipe(models.Model):
 
     class Meta:
         unique_together = ('ingredient', 'recipe')
+        ordering = ('ingredient__name',)
         default_related_name = 'recipe_ingredients'
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
@@ -111,6 +113,7 @@ class Favorite(AuthorRecipeModel):
 
     class Meta:
         unique_together = ('author', 'recipe')
+        ordering = ('author',)
         default_related_name = 'favorites'
         verbose_name = 'Избранное'
         verbose_name_plural = verbose_name
@@ -123,6 +126,7 @@ class ShoppingCart(AuthorRecipeModel):
 
     class Meta:
         unique_together = ('author', 'recipe')
+        ordering = ('author',)
         default_related_name = 'shopping_cart'
         verbose_name = 'Список покупок'
         verbose_name_plural = 'Списки покупок'

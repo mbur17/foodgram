@@ -1,9 +1,13 @@
+from rest_framework import serializers
+
 from api.users.serializers import FoodgramUserSerializer
 from recipes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShoppingCart, Tag)
-from rest_framework import serializers
 
 from ..fields import Base64ImageField
+
+AMOUNT_AND_TIME_MAX_VALUE = 32_000
+AMOUNT_AND_TIME_MIN_VALUE = 1
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -37,6 +41,10 @@ class ShortIngredientInRecipeSerializer(serializers.ModelSerializer):
     """Сериализатор короткого представления ингредиента."""
     id = serializers.PrimaryKeyRelatedField(
         queryset=Ingredient.objects.all(), source='ingredient'
+    )
+    amount = serializers.IntegerField(
+        max_value=AMOUNT_AND_TIME_MAX_VALUE,
+        min_value=AMOUNT_AND_TIME_MIN_VALUE
     )
 
     class Meta:
@@ -91,6 +99,10 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
         many=True, queryset=Tag.objects.all()
     )
     image = Base64ImageField()
+    cooking_time = serializers.IntegerField(
+        max_value=AMOUNT_AND_TIME_MAX_VALUE,
+        min_value=AMOUNT_AND_TIME_MIN_VALUE
+    )
 
     class Meta:
         model = Recipe
@@ -135,14 +147,6 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
                 'Изображение для рецепта обязательно.'
             )
         return image_data
-
-    def validate_cooking_time(self, value):
-        """Проверка времени приготовления."""
-        if value < 1 or value > 720:
-            raise serializers.ValidationError(
-                'Время приготовления должно быть реалистичным.'
-            )
-        return value
 
     def _save_tags(self, instance, tags_data):
         """Обработка тегов для рецепта."""

@@ -1,12 +1,12 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from recipes.models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+
+from recipes.models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
 from shortener.models import UrlMap
 from shortener.services import generate_unique_code
 
@@ -107,12 +107,12 @@ class RecipeViewSet(ModelViewSet):
         user = request.user
         shopping_list = generate_shopping_list(user)
         if not shopping_list:
-            return HttpResponse(
+            return Response(
                 'Список покупок пуст.',
                 content_type='text/plain',
-                status=204,
+                status=status.HTTP_204_NO_CONTENT
             )
-        response = HttpResponse(shopping_list, content_type='text/plain')
+        response = Response(shopping_list, content_type='text/plain')
         response['Content-Disposition'] = (
             'attachment; filename="shopping_list.txt"'
         )

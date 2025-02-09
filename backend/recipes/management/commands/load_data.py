@@ -2,6 +2,7 @@ import json
 import os
 
 from django.core.management.base import BaseCommand
+
 from recipes.models import Ingredient
 
 CONTAINER_FILE_PATH = '/app/ingredients.json'

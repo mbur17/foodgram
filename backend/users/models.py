@@ -16,9 +16,9 @@ class FoodgramUser(AbstractUser):
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     class Meta:
+        ordering = ('username',)
         verbose_name = 'Пользователя'
         verbose_name_plural = 'Пользователи'
-        ordering = ('username',)
 
     def __str__(self):
         return f'{self.username} ({self.email})'
@@ -40,9 +40,9 @@ class Subscription(models.Model):
 
     class Meta:
         unique_together = ('user', 'author')
+        ordering = ('user',)
         verbose_name = 'Подписку'
         verbose_name_plural = 'Подписки'
-        ordering = ('user',)
 
     def __str__(self):
         return f'{self.user.username} подписан на {self.author.username}'

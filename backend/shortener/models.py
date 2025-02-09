@@ -1,4 +1,5 @@
 from django.db import models
+
 from recipes.models import Recipe
 
 SHORT_CODE_MAX_LENGTH = 10
@@ -16,6 +17,7 @@ class UrlMap(models.Model):
     )
 
     class Meta:
+        ordering = ('recipe__created_at',)
         verbose_name = 'Короткую ссылку'
         verbose_name_plural = 'Короткие ссылки'
 
